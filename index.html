@@ -1,1 +1,174 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اختبار الحاسوب العام – الصف الثامن</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8f9fa;--surf:#fff;--cont:#f1f3f4;--ink:#202124;--mute:#5f6368;--line:#dadce0;--pri:#1a73e8;--onpri:#fff;--pric:#e8f0fe;--ok:#188038;--okc:#e6f4ea;--bad:#d93025;--badc:#fce8e6;--sh:0 1px 2px rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#202124;--surf:#292a2d;--cont:#35363a;--ink:#e8eaed;--mute:#9aa0a6;--line:#5f6368;--pri:#8ab4f8;--onpri:#202124;--pric:#2a3a55;--ok:#81c995;--okc:#1e3a2a;--bad:#f28b82;--badc:#47272a;--sh:0 1px 2px rgba(0,0,0,.6),0 2px 6px 2px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{--bg:#202124;--surf:#292a2d;--cont:#35363a;--ink:#e8eaed;--mute:#9aa0a6;--line:#5f6368;--pri:#8ab4f8;--onpri:#202124;--pric:#2a3a55;--ok:#81c995;--okc:#1e3a2a;--bad:#f28b82;--badc:#47272a;--sh:0 1px 2px rgba(0,0,0,.6),0 2px 6px 2px rgba(0,0,0,.3)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Arabic",Roboto,Tahoma,Arial,sans-serif;line-height:1.7}
+header{background:var(--surf);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:2}
+.bar{max-width:720px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.logo{display:flex;gap:4px}.logo i{width:10px;height:10px;border-radius:50%}
+.logo i:nth-child(1){background:#4285f4}.logo i:nth-child(2){background:#ea4335}.logo i:nth-child(3){background:#fbbc04}.logo i:nth-child(4){background:#34a853}
+header b{font-weight:500;font-size:1.1rem}
+main{max-width:720px;margin:0 auto;padding:20px 16px 32px}
+.card{background:var(--surf);border-radius:20px;padding:24px;box-shadow:var(--sh);margin-bottom:16px}
+h1{font-size:1.9rem;font-weight:500;margin:0 0 8px;line-height:1.4}
+h2{font-size:1.25rem;font-weight:500;margin:0 0 12px}
+p{margin:0 0 14px}.mute{color:var(--mute);font-size:.92rem}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--pric);color:var(--pri);border-radius:8px;padding:6px 14px;font-weight:500;font-size:.95rem;margin:4px 0 16px}
+.note{display:flex;gap:12px;align-items:flex-start;background:var(--cont);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:.92rem;color:var(--mute)}
+.note svg{flex:none;fill:var(--ok);margin-top:3px}
+button{font:inherit;cursor:pointer;border:0}
+.btn{background:var(--pri);color:var(--onpri);border-radius:100px;padding:10px 28px;font-weight:500;font-size:1rem;min-height:44px;box-shadow:0 1px 2px rgba(60,64,67,.3);transition:filter .15s}
+.btn:hover{filter:brightness(1.08)}.btn:disabled{background:var(--cont);color:var(--mute);box-shadow:none;cursor:not-allowed}
+.btn.tonal{background:var(--pric);color:var(--pri);box-shadow:none}
+button:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+.top{display:flex;justify-content:space-between;color:var(--mute);font-size:.92rem;margin-bottom:8px}
+.prog{height:4px;border-radius:4px;background:var(--cont);overflow:hidden;margin-bottom:22px}
+.prog i{display:block;height:100%;background:var(--pri);border-radius:4px;transition:width .3s}
+.q{font-size:1.25rem;font-weight:500;line-height:1.6}
+.opts{display:grid;gap:10px;margin:18px 0 24px}
+.opt{display:flex;align-items:center;gap:14px;text-align:right;width:100%;background:var(--surf);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 16px;min-height:52px;transition:background .15s,border-color .15s}
+.opt:hover{background:var(--cont)}
+.opt .r{flex:none;width:20px;height:20px;border:2px solid var(--mute);border-radius:50%;display:grid;place-items:center}
+.opt.sel{background:var(--pric);border-color:var(--pri);color:var(--ink)}
+.opt.sel .r{border-color:var(--pri)}.opt.sel .r::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--pri)}
+.actions{display:flex;justify-content:flex-end}
+.gauge{display:flex;flex-direction:column;align-items:center;margin:4px 0 18px;text-align:center}
+.ring{position:relative;width:150px;height:150px}
+.ring svg{transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:2.2rem;font-weight:500;direction:ltr}
+.pills{display:flex;gap:10px;margin-bottom:22px}
+.pills div{flex:1;text-align:center;border-radius:12px;padding:10px;font-weight:500}
+.pills .g{background:var(--okc);color:var(--ok)}.pills .r{background:var(--badc);color:var(--bad)}
+.item{display:flex;gap:12px;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.item.ok{background:var(--okc)}.item.no{background:var(--badc)}
+.item svg{flex:none;margin-top:4px}.item.ok svg{fill:var(--ok)}.item.no svg{fill:var(--bad)}
+.item .t{font-weight:500;margin-bottom:2px}.item small{display:block;color:var(--mute);font-size:.92rem}
+.item.no small.c{color:var(--ok);font-weight:500}
+.center{text-align:center;margin-top:20px}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bar"><div class="logo"><i></i><i></i><i></i><i></i></div><b>اختبار الحاسوب العام</b></div></header>
+<main>
+<section id="start" class="card">
+  <h1>اختبر معلوماتك في الحاسوب</h1>
+  <p class="mute">اختبار عام للصف الثامن</p>
+  <div class="chip">إعداد الطالب: عبد الرحمن قطش – الصف الثامن</div>
+  <p>10 أسئلة تُختار عشوائيًا في كل مرة. اختر إجابة واحدة لكل سؤال، وفي النهاية ستعرف علامتك وإجاباتك الصحيحة والخاطئة.</p>
+  <div class="note"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4Zm-1 15-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7Z"/></svg><span>لا يحفظ الموقع أي معلومات عنك ولا يرسل أي شيء إلى أي مكان. كل شيء يحدث على جهازك فقط.</span></div>
+  <button class="btn" id="go">ابدأ الاختبار</button>
+</section>
+
+<section id="quiz" class="card" hidden>
+  <div class="top"><span id="count"></span><span id="pct"></span></div>
+  <div class="prog"><i id="prog"></i></div>
+  <div class="q" id="qt"></div>
+  <div class="opts" id="opts"></div>
+  <div class="actions"><button class="btn" id="next" disabled>التالي</button></div>
+</section>
+
+<section id="result" hidden>
+  <div class="card">
+    <h2>نتيجة الاختبار</h2>
+    <div class="gauge"><div class="ring"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="var(--cont)" stroke-width="12"/><circle id="arc" cx="75" cy="75" r="64" fill="none" stroke="var(--pri)" stroke-width="12" stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="402"/></svg><b id="sc"></b></div><p id="msg" style="margin-top:12px;font-weight:500"></p></div>
+    <div class="pills"><div class="g" id="sg"></div><div class="r" id="sr"></div></div>
+    <h2>ملخص الإجابات</h2>
+    <div id="list"></div>
+    <div class="center"><button class="btn" id="again">اختبار جديد</button></div>
+  </div>
+</section>
+<p class="mute center">إعداد: عبد الرحمن قطش – الصف الثامن</p>
+</main>
+
+<script>
+const BANK=[
+["ما الجهاز المسؤول عن معالجة البيانات وتنفيذ التعليمات في الحاسوب؟",["الشاشة","المعالج (CPU)","لوحة المفاتيح","الطابعة"],1],
+["أي مما يلي يُعد جهاز إدخال؟",["الطابعة","السماعات","الماسح الضوئي","الشاشة"],2],
+["أي مما يلي يُعد جهاز إخراج؟",["الفأرة","الطابعة","الميكروفون","لوحة المفاتيح"],1],
+["أي وحدة من وحدات قياس التخزين التالية هي الأكبر؟",["كيلوبايت","ميغابايت","غيغابايت","بايت"],2],
+["كم بتًّا (bit) يساوي البايت الواحد؟",["4","8","16","2"],1],
+["أي مما يلي نظام تشغيل؟",["ويندوز","إكسل","بوربوينت","كروم"],0],
+["أي ذاكرة تفقد محتوياتها عند إغلاق الحاسوب؟",["ذاكرة القراءة ROM","القرص الصلب","الذاكرة العشوائية RAM","فلاشة USB"],2],
+["ما اختصار لوحة المفاتيح المستخدم لنسخ نص محدد؟",["Ctrl + C","Ctrl + V","Ctrl + X","Ctrl + Z"],0],
+["ما اللغة المستخدمة لبناء هيكل صفحات الويب؟",["HTML","Excel","Word","Paint"],0],
+["أي برنامج يُستخدم لكتابة وتنسيق النصوص؟",["مايكروسوفت وورد","مايكروسوفت إكسل","الآلة الحاسبة","مشغل الفيديو"],0],
+["أي برنامج يُستخدم للجداول والعمليات الحسابية؟",["Paint","Excel","Word","Notepad"],1],
+["أي كلمة مرور من التالية هي الأقوى؟",["12345678","ahmad","password","Ab#9x!Q7pL"],3],
+["ما وظيفة برنامج مكافحة الفيروسات؟",["تسريع الإنترنت","حماية الجهاز من البرمجيات الضارة","زيادة حجم الشاشة","طباعة الملفات"],1],
+["ما الرقمان اللذان يستخدمهما النظام الثنائي؟",["0 و 1","1 و 2","0 و 9","1 و 10"],0],
+["أي مما يلي متصفح إنترنت؟",["ويندوز","جوجل كروم","وورد","فوتوشوب"],1],
+["ما القطعة التي تربط جميع مكونات الحاسوب ببعضها؟",["اللوحة الأم","الفأرة","السماعة","الكاميرا"],0],
+["أي امتداد من التالية يدل على ملف صورة؟",[".docx",".mp3",".jpg",".xlsx"],2],
+["ما اختصار لوحة المفاتيح المستخدم لحفظ الملف؟",["Ctrl + P","Ctrl + S","Ctrl + A","Ctrl + F"],1],
+["ما هو التصيّد الاحتيالي (Phishing)؟",["برنامج لتنظيف الجهاز","محاولة خداع لسرقة معلومات المستخدم","نوع من الذاكرة","لعبة إلكترونية"],1],
+["ما الخوارزمية؟",["جهاز إدخال","خطوات منظمة ومرتبة لحل مشكلة","نوع من الفيروسات","اسم شركة"],1],
+["ما المقصود بالمكونات المادية (Hardware)؟",["البرامج فقط","الأجزاء الملموسة من الحاسوب","الملفات","شبكة الإنترنت"],1],
+["أي جزء يخزّن الملفات بشكل دائم داخل الحاسوب؟",["الذاكرة العشوائية RAM","القرص الصلب","المعالج","بطاقة الشاشة"],1],
+["ما وظيفة الراوتر (Router)؟",["طباعة المستندات","توصيل الأجهزة بالشبكة والإنترنت","تشغيل الأفلام فقط","تبريد الجهاز"],1],
+["أي سلوك يُعد استخدامًا آمنًا للإنترنت؟",["مشاركة كلمة المرور مع الأصدقاء","عدم مشاركة كلمة المرور مع أحد","فتح أي رابط يصلني","نشر عنوان بيتي"],1],
+["أي مما يلي ليس لغة برمجة؟",["Python","Java","C++","Google Chrome"],3],
+["ما الرمز الذي لا بد منه في عنوان البريد الإلكتروني؟",["#","@","$","%"],1],
+["ما اسم الشاشة التي تظهر بعد تشغيل الحاسوب وتحتوي على الأيقونات؟",["سطح المكتب","شريط الأدوات","سلة المحذوفات","لوحة التحكم"],0],
+["ما فائدة النسخ الاحتياطي (Backup)؟",["زيادة سرعة الطابعة","حفظ نسخة من الملفات تحسبًا لضياعها","حذف الملفات القديمة","تغيير خلفية الشاشة"],1]
+];
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const OK='<svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-2 15-5-5 1.4-1.4L10 14.2l7.6-7.6L19 8l-9 9Z"/></svg>';
+const NO='<svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm5 13.6L15.6 17 12 13.4 8.4 17 7 15.6 10.6 12 7 8.4 8.4 7l3.6 3.6L15.6 7 17 8.4 13.4 12l3.6 3.6Z"/></svg>';
+let Q=[],i=0,ans=[];
+function show(id){["start","quiz","result"].forEach(s=>$(s).hidden=s!==id);window.scrollTo(0,0)}
+function begin(){
+  Q=shuf(BANK).slice(0,10).map(([t,o,c])=>({t,o:shuf(o.map((x,k)=>({x,ok:k===c})))}));
+  i=0;ans=[];show("quiz");draw();
+}
+function draw(){
+  const q=Q[i];
+  $("count").textContent="السؤال "+(i+1)+" من "+Q.length;
+  $("pct").textContent=Math.round(i/Q.length*100)+"%";
+  $("prog").style.width=(i/Q.length*100)+"%";
+  $("qt").textContent=q.t;
+  $("next").disabled=true;
+  $("next").textContent=i===Q.length-1?"إنهاء الاختبار":"التالي";
+  const box=$("opts");box.innerHTML="";
+  q.o.forEach((op,k)=>{
+    const b=document.createElement("button");b.className="opt";
+    b.innerHTML='<span class="r"></span><span></span>';b.lastChild.textContent=op.x;
+    b.onclick=()=>{ans[i]=k;[...box.children].forEach(c=>c.classList.remove("sel"));b.classList.add("sel");$("next").disabled=false};
+    box.appendChild(b);
+  });
+}
+function finish(){
+  const n=Q.length;let right=0;const list=$("list");list.innerHTML="";
+  Q.forEach((q,k)=>{
+    const pick=q.o[ans[k]],good=q.o.find(o=>o.ok),ok=pick.ok;if(ok)right++;
+    const d=document.createElement("div");d.className="item "+(ok?"ok":"no");
+    d.innerHTML=(ok?OK:NO)+'<div><div class="t"></div><small class="a"></small>'+(ok?"":'<small class="c"></small>')+'</div>';
+    d.querySelector(".t").textContent=(k+1)+". "+q.t;
+    d.querySelector(".a").textContent="إجابتك: "+pick.x;
+    if(!ok)d.querySelector(".c").textContent="الإجابة الصحيحة: "+good.x;
+    list.appendChild(d);
+  });
+  $("sc").textContent=right+"/"+n;
+  $("sg").textContent="صحيحة: "+right;$("sr").textContent="خاطئة: "+(n-right);
+  $("msg").textContent=right>=9?"ممتاز! أنت خبير حاسوب":right>=7?"جيد جدًا، استمر":right>=5?"جيد، راجع الأسئلة الخاطئة وحاول مرة أخرى":"حاول مرة أخرى بعد مراجعة الإجابات الصحيحة";
+  show("result");
+  requestAnimationFrame(()=>{$("arc").style.transition="stroke-dashoffset .8s";$("arc").style.strokeDashoffset=402*(1-right/n)});
+}
+$("go").onclick=begin;
+$("again").onclick=()=>{$("arc").style.transition="none";$("arc").style.strokeDashoffset=402;begin()};
+$("next").onclick=()=>{if(i<Q.length-1){i++;draw()}else finish()};
+</script>
+</body>
+</html>
